@@ -18,3 +18,9 @@ function stringifyValue(value) {
 
     return value.toString();
 }
+
+function invertBoolean(value) {
+    if (typeof value !== "boolean")
+        throw new Error("argument should be of boolean type");
+    return !value;
+}
