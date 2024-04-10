@@ -9,7 +9,7 @@ function addValues(value1, value2) {
     ) {
         let result = value1 + value2;
         if (!Number.isSafeInteger(result))
-            result = BigInt(value1) + BigInt(value2);
+            result = BigInt(Math.round(value1)) + BigInt(Math.round(value2));
         return result;
     }
     if (
