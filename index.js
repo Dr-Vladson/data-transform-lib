@@ -24,3 +24,15 @@ function invertBoolean(value) {
         throw new Error("argument should be of boolean type");
     return !value;
 }
+
+function convertToNumber(value) {
+    let result;
+    if (typeof value === "string") result = parseFloat(value);
+    else if (typeof value === "symbol") {
+        const strOfSymbol = value.toString();
+        result = parseFloat(strOfSymbol.slice(7, strOfSymbol.length - 1));
+    } else result = Number(value);
+
+    if (isNaN(result)) throw new Error("Value can`t be converted to number");
+    return result;
+}
