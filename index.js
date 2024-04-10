@@ -68,3 +68,14 @@ function coerceToType(value, type) {
         }
     }
 }
+
+function getIsStrInt(str) {
+    if (typeof str !== "string") return false;
+    if (str.startsWith("+") || str.startsWith("-")) str = str.slice(1);
+    if (str.length === 0) return false;
+
+    for (let char of str) {
+        if (isNaN(Number(char))) return false;
+    }
+    return true;
+}
