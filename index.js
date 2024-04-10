@@ -36,3 +36,35 @@ function convertToNumber(value) {
     if (isNaN(result)) throw new Error("Value can`t be converted to number");
     return result;
 }
+
+function coerceToType(value, type) {
+    switch (type) {
+        case "string": {
+            return stringifyValue(value);
+        }
+        case "number": {
+            return convertToNumber(value);
+        }
+        case "bigint": {
+            return BigInt(value);
+        }
+        case "symbol": {
+            return Symbol(value);
+        }
+        case "null": {
+            return null;
+        }
+        case "undefined": {
+            return undefined;
+        }
+        case "boolean": {
+            return Boolean(value);
+        }
+        case "object": {
+            return { value };
+        }
+        default: {
+            throw new Error("Incorrect type");
+        }
+    }
+}
