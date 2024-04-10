@@ -1,12 +1,25 @@
 function addValues(value1, value2) {
     if (
-        !(typeof value1 === "number" && typeof value2 === "number") &&
-        !(typeof value1 === "bigint" && typeof value2 === "bigint") &&
-        !(typeof value1 === "string" && typeof value2 === "string")
-    )
-        throw new Error("Incorrect types of arguments");
+        typeof value1 === "number" &&
+        typeof value2 === "number" &&
+        !isNaN(value1) &&
+        !isNaN(value2) &&
+        isFinite(value1) &&
+        isFinite(value2)
+    ) {
+        let result = value1 + value2;
+        if (!Number.isSafeInteger(result))
+            result = BigInt(value1) + BigInt(value2);
+        return result;
+    }
+    if (
+        (typeof value1 === "bigint" && typeof value2 === "bigint") ||
+        (typeof value1 === "string" && typeof value2 === "string")
+    ) {
+        return value1 + value2;
+    }
 
-    return value1 + value2;
+    throw new Error("Incorrect arguments");
 }
 
 function stringifyValue(value) {
